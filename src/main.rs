@@ -4,20 +4,22 @@ use nvml_wrapper::error::NvmlError;
 use nvml_wrapper::{Nvml};
 //use pretty_bytes::converter::convert;
 
-fn clock_tier(percentage: u32) -> String {
-    if percentage < 30 {
+fn clock_tier(mut percentage: f64) -> String {
+    percentage = (percentage * 100.0).round();
+    if percentage < 30.0 {
         format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
-    } else if percentage < 70 {
+    } else if percentage < 70.0 {
         format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
         format!("%{{F#FF0000}}{:>6}%{{F-}}", percentage) // Red for high percentages
     }
 }
 
-fn memory_tier(percentage: u64) -> String {
-    if percentage < 30 {
+fn memory_tier(mut percentage: f64) -> String {
+    percentage = (percentage * 100.0).round();
+    if percentage < 30.0 {
         format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
-    } else if percentage < 70 {
+    } else if percentage < 70.0 {
         format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
         format!("%{{F#FF0000}}{:>6}%{{F-}}", percentage) // Red for high percentages
@@ -47,11 +49,11 @@ fn main() -> Result<(), NvmlError> {
     let temperature = device.temperature(TemperatureSensor::Gpu)?;
     let formatted_temperature = temperature_tier(temperature);
 
-    let percentage_clock_used = device.clock_info(Clock::Graphics)? / device.max_clock_info(Clock::Graphics)?;
+    let percentage_clock_used = device.clock_info(Clock::Graphics)?  as f64 / device.max_clock_info(Clock::Graphics)? as f64;
     let formatted_percentage_clock_used = clock_tier(percentage_clock_used);
 
     let mem_info = device.memory_info()?;
-    let percentage_mem_used = mem_info.used / mem_info.total;
+    let percentage_mem_used = mem_info.used as f64 / mem_info.total as f64;
     let formatted_percentage_mem_used = memory_tier(percentage_mem_used);
 
     println!(
