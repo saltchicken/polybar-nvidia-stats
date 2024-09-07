@@ -6,31 +6,31 @@ use nvml_wrapper::{Nvml};
 
 fn clock_tier(percentage: u32) -> String {
     if percentage < 30 {
-        format!("%{{F#00FF00}}{}%{{F-}}", percentage) // Green for low percentages
+        format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
     } else if percentage < 70 {
-        format!("%{{F#FFFF00}}{}%{{F-}}", percentage) // Yellow for medium percentages
+        format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
-        format!("%{{F#FF0000}}{}%{{F-}}", percentage) // Red for high percentages
+        format!("%{{F#FF0000}}{:>6}%{{F-}}", percentage) // Red for high percentages
     }
 }
 
 fn memory_tier(percentage: u64) -> String {
     if percentage < 30 {
-        format!("%{{F#00FF00}}{}%{{F-}}", percentage) // Green for low percentages
+        format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
     } else if percentage < 70 {
-        format!("%{{F#FFFF00}}{}%{{F-}}", percentage) // Yellow for medium percentages
+        format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
-        format!("%{{F#FF0000}}{}%{{F-}}", percentage) // Red for high percentages
+        format!("%{{F#FF0000}}{:>6}%{{F-}}", percentage) // Red for high percentages
     }
 }
 
 fn temperature_tier(temperature: u32) -> String {
     if temperature <= 45 {
-        format!("%{{F#00FF00}}{}%{{F-}}", temperature) // Green for low percentages
+        format!("%{{F#00FF00}}{:>6}%{{F-}}", temperature) // Green for low percentages
     } else if temperature <= 60 {
-        format!("%{{F#FFFF00}}{}%{{F-}}", temperature) // Yellow for medium percentages
+        format!("%{{F#FFFF00}}{:>6}%{{F-}}", temperature) // Yellow for medium percentages
     } else {
-        format!("%{{F#FF0000}}{}%{{F-}}", temperature) // Red for high percentages
+        format!("%{{F#FF0000}}{:>6}%{{F-}}", temperature) // Red for high percentages
     }
 }
 
