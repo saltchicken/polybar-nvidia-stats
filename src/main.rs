@@ -7,7 +7,7 @@ use nvml_wrapper::{Nvml};
 fn clock_tier(mut percentage: f64) -> String {
     percentage = (percentage * 100.0).round();
     if percentage < 30.0 {
-        format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
+        format!("%{{F#FFFFFF}}{:>6}%{{F-}}", percentage) // Green for low percentages
     } else if percentage < 70.0 {
         format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
@@ -18,7 +18,7 @@ fn clock_tier(mut percentage: f64) -> String {
 fn memory_tier(mut percentage: f64) -> String {
     percentage = (percentage * 100.0).round();
     if percentage < 30.0 {
-        format!("%{{F#00FF00}}{:>6}%{{F-}}", percentage) // Green for low percentages
+        format!("%{{F#FFFFFF}}{:>6}%{{F-}}", percentage) // Green for low percentages
     } else if percentage < 70.0 {
         format!("%{{F#FFFF00}}{:>6}%{{F-}}", percentage) // Yellow for medium percentages
     } else {
@@ -28,7 +28,7 @@ fn memory_tier(mut percentage: f64) -> String {
 
 fn temperature_tier(temperature: u32) -> String {
     if temperature <= 45 {
-        format!("%{{F#00FF00}}{:>6}%{{F-}}", temperature) // Green for low percentages
+        format!("%{{F#FFFFFF}}{:>6}%{{F-}}", temperature) // Green for low percentages
     } else if temperature <= 60 {
         format!("%{{F#FFFF00}}{:>6}%{{F-}}", temperature) // Yellow for medium percentages
     } else {
@@ -59,7 +59,7 @@ fn main() -> Result<(), NvmlError> {
     println!(
         //"{graphics_clock} {used_mem}/{total_mem} {temperature}",
         //"{percentage_clock_used} {percentage_mem_used} %{{F#FFFF00}}{temperature}%{{F-}}",
-        "{percentage_clock_used} {percentage_mem_used} {temperature}",
+        "{percentage_clock_used}% CLK{percentage_mem_used}% VRAM{temperature}°C",
         //graphics_clock = graphics_clock,
         percentage_clock_used = formatted_percentage_clock_used,
         percentage_mem_used = formatted_percentage_mem_used,
